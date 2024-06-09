@@ -1,0 +1,24 @@
+<div class="chat-room-container">
+    <div class="chat-header">
+      <button class="back-button" (click)="goBack()">&#8592;</button>
+      <div class="chat-header-info">
+        <img src="assets/user-avatar.png" alt="User" class="header-avatar">
+        <span class="header-username">Username</span>
+      </div>
+    </div>
+  
+    <div class="chat-messages" #scrollMe [scrollTop]="scrollMe.scrollHeight" *ngIf="messages.length > 0">
+      <div *ngFor="let message of messages" class="message" [class.sent]="message.userInfo.userId === user.userId">
+        <p>{{ message.message }}</p>
+        <time>{{ message.time }}</time>
+      </div>
+    </div>
+  
+    <div class="chat-input-container">
+      <form (submit)="onSubmit($event, msgInput)">
+        <textarea #msgInput placeholder="Type a message" class="chat-input"></textarea>
+        <button type="submit" class="send-button">Send</button>
+      </form>
+    </div>
+  </div>
+  
