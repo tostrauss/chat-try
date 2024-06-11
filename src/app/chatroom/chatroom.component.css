@@ -42,14 +42,6 @@
     display: center;
   }
   
-  .search-container {
-    width: 100%;
-    margin: 0;
-    padding: 10px 20px;
-    box-sizing: border-box;
-    background-color: #f5f5f5; 
-  }
-  
   .chat-messages {
     flex-grow: 1;
     padding: 10px;
@@ -68,7 +60,7 @@
   
   .message.sent {
     margin-left: auto;
-    background-color: #c5cae9;
+    background-color: #ccc;
   }
   
   .chat-input-container {
