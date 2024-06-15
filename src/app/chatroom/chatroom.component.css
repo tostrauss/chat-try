@@ -85,4 +85,34 @@
     border-radius: 5px;
     cursor: pointer;
   }
+
+  .send-button:hover{
+    background-color: #ccc;
+    text-decoration: none;
+    transition: color .1s ease-in, background-color .1s ease-in;
+    cursor: pointer;
+  }
+
+  .send-button:active{
+    font-size: 18px;
+  transition: font-size .1s ease-in-out;
+  }
   
+.emoji-picker-container {
+  position: absolute;
+  bottom: 60px; 
+  right: 20px;  
+  z-index: 1000; 
+}
+
+.emoji-picker-container:hover{
+  background-attachment: fixed;
+  transition: color .1s ease-in, background-color .1s ease-in;
+  cursor:pointer;
+}
+
+.galleryInput:hover {
+  cursor:pointer;
+  transition: font-size .1s ease-in-out;
+}
+

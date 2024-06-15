@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 
+
 interface Message {
   message: string;
   userInfo: {
@@ -18,7 +19,7 @@ interface Message {
 })
 export class ChatRoomComponent implements OnInit {
   @ViewChild('msgInput') msgInput!: ElementRef<HTMLTextAreaElement>;
-  @ViewChild('galleryInput') galleryInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('galleryInput') galleryInput!: ElementRef;
 
   messages: Message[] = [];
   user = { userId: 1, username: 'Current User' };

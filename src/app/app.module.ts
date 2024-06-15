@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { ChatHomeComponent } from './chathome/chathome.component';
 import { ChatRoomComponent } from './chatroom/chatroom.component';
 import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
-
+import { PickerComponent } from '@ctrl/ngx-emoji-mart';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,8 @@ import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
     FormsModule,
     RouterModule,
     AppRoutingModule,
-    EmojiModule
+    EmojiModule,
+    PickerComponent
   ],
   providers: [],
   bootstrap: [AppComponent],

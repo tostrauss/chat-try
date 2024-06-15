@@ -1,3 +1,4 @@
+
 <div class="chat-room-container">
   <div class="chat-header">
     <button class="back-button" (click)="goBack()">&#8592;</button>
@@ -18,14 +19,17 @@
     <form (submit)="onSubmit($event, msgInput)">
       <div class="input-buttons">
         <button type="button" class="emoji-button" (click)="toggleEmojiPicker()">😊</button>
-        <input type="file" #galleryInput style="display:none" (change)="onFileSelected($event)" accept="image/*"/>
+        <input type="file" id="galleryInput" #galleryInput style="display:none" (change)="onFileSelected($event)" accept="image/*"/>
         <button type="button" class="gallery-button" (click)="openGallery()">📷</button>
       </div>
       <textarea #msgInput placeholder="Type a message" class="chat-input"></textarea>
       <button type="submit" class="send-button">Send</button>
     </form>
-    <emoji-picker *ngIf="showEmojiPicker" (emojiClick)="addEmoji($any($event))"></emoji-picker>
+    <div *ngIf="showEmojiPicker" class="emoji-picker-container">
+      <emoji-mart (emojiSelect)="addEmoji($event)"></emoji-mart>
+    </div>
   </div>
 </div>
 
+  
   
