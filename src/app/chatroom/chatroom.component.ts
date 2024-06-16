@@ -1,16 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
-
-
-interface Message {
-  message: string;
-  userInfo: {
-    userId: number;
-    username: string;
-  };
-  time: string;
-}
+import { ChatService } from '../chat.service';
+import { Message } from '../message.model';
 
 @Component({
   selector: 'app-chat-room',
@@ -26,27 +18,24 @@ export class ChatRoomComponent implements OnInit {
   userId!: number;
   showEmojiPicker = false;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router, private chatService: ChatService) {
     this.userId = this.route.snapshot.params['id'];
   }
 
   ngOnInit(): void {
-    this.messages = [
-      {
-        message: 'Hello there!',
-        userInfo: { userId: 1, username: 'Andrew Parker' },
-        time: '12:00'
-      },
-      {
-        message: 'Hi! How are you?',
-        userInfo: { userId: 2, username: 'Karen Castillo' },
-        time: '12:01'
-      }
-    ];
+    this.loadInitialMessages();
   }
 
   goBack(): void {
     this.router.navigate(['/chat-home']);  // Adjust the route as needed
+  }
+
+  loadInitialMessages(): void {
+    this.chatService.getMessages(this.userId).subscribe((messages: Message[]) => {
+      this.messages = messages;
+    }, (error: any) => {
+      console.error('Error fetching messages:', error);
+    });
   }
 
   sendMessage(message: string): void {
@@ -58,6 +47,18 @@ export class ChatRoomComponent implements OnInit {
         time: `${nd.getHours()}:${nd.getMinutes()}`
       };
       this.messages.push(newMessage);
+  
+      const data = {
+        sub: 'stringjshdjsidb',
+        Email: 'info@tetech.website',
+        conversation: newMessage.message
+      };
+  
+      this.chatService.sendMessage(data).subscribe((response: any) => {
+        console.log('Message sent to the backend:', Response);
+      }, (error: any) => {
+        console.error('Error sending message:', error);
+      });
     }
   }
 
@@ -97,7 +98,3 @@ export class ChatRoomComponent implements OnInit {
     }
   }
 }
-
-
-
-
