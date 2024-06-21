@@ -27,7 +27,7 @@ export class ChatRoomComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/chat-home']);  // Adjust the route as needed
+    this.router.navigate(['/chat-home']);  
   }
 
   loadInitialMessages(): void {
@@ -51,11 +51,11 @@ export class ChatRoomComponent implements OnInit {
       const data = {
         sub: 'stringjshdjsidb',
         Email: 'info@tetech.website',
-        conversation: newMessage.message
+        conversation: newMessage
       };
   
       this.chatService.sendMessage(data).subscribe((response: any) => {
-        console.log('Message sent to the backend:', Response);
+        console.log('Message sent to the backend:', response);
       }, (error: any) => {
         console.error('Error sending message:', error);
       });

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Message } from './message.model';
 
@@ -9,17 +9,18 @@ import { Message } from './message.model';
 export class ChatService {
   private apiUrl = 'https://collegerecruit.us/crecruit/index.php';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  
   getMessages(userId: number): Observable<Message[]> {
-
     return this.http.get<Message[]>(`${this.apiUrl}/messages?userId=${userId}`);
   }
 
-  // Send a new message to the backend
   sendMessage(data: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, data);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>(this.apiUrl, data, { headers });
   }
 }
+
 
