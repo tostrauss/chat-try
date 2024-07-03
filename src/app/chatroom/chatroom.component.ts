@@ -1,13 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmojiEvent } from '@ctrl/ngx-emoji-mart/ngx-emoji';
-import { ChatService } from '../chat.service';
 import { Message } from '../message.model';
 
 @Component({
   selector: 'app-chat-room',
   templateUrl: './chatroom.component.html',
-  styleUrls: ['./chatroom.component.scss']
+  styleUrls: ['./chatroom.component.css']
 })
 export class ChatRoomComponent implements OnInit {
   @ViewChild('msgInput') msgInput!: ElementRef<HTMLTextAreaElement>;
@@ -18,25 +17,32 @@ export class ChatRoomComponent implements OnInit {
   userId!: number;
   showEmojiPicker = false;
 
-  constructor(private route: ActivatedRoute, private router: Router, private chatService: ChatService) {
-    this.userId = this.route.snapshot.params['id'];
+  constructor(
+    private route: ActivatedRoute, 
+    private router: Router, 
+  ) {
+    this.userId = +this.route.snapshot.params['id'];
+  }
+  ngOnInit(): void {
+    this.messages = [
+      {
+        message: 'Hello there!',
+        userInfo: { userId: 1, username: 'Andrew Parker' },
+        time: '12:00'
+      },
+      {
+        message: 'Hi! How are you?',
+        userInfo: { userId: 2, username: 'Karen Castillo' },
+        time: '12:01'
+      }
+    ];
   }
 
-  ngOnInit(): void {
-    this.loadInitialMessages();
-  }
 
   goBack(): void {
     this.router.navigate(['/chat-home']);  
   }
 
-  loadInitialMessages(): void {
-    this.chatService.getMessages(this.userId).subscribe((messages: Message[]) => {
-      this.messages = messages;
-    }, (error: any) => {
-      console.error('Error fetching messages:', error);
-    });
-  }
 
   sendMessage(message: string): void {
     if (message.trim()) {
@@ -48,17 +54,8 @@ export class ChatRoomComponent implements OnInit {
       };
       this.messages.push(newMessage);
   
-      const data = {
-        sub: 'stringjshdjsidb',
-        Email: 'info@tetech.website',
-        conversation: newMessage
-      };
   
-      this.chatService.sendMessage(data).subscribe((response: any) => {
-        console.log('Message sent to the backend:', response);
-      }, (error: any) => {
-        console.error('Error sending message:', error);
-      });
+     
     }
   }
 

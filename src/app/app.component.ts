@@ -1,5 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MessagingService } from '../messaging.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -10,17 +9,7 @@ export class AppComponent implements OnInit {
   title = 'chat-try2';
   currentMessage: any;
 
-  constructor(@Inject(MessagingService) private messagingService: MessagingService) {} // Use @Inject
-
-  ngOnInit() {
-    this.messagingService.receiveMessage();
-    this.messagingService.currentMessage.subscribe((message: any) => {
-      this.currentMessage = message;
-    });
-  }
-
-  requestPermission() {
-    this.messagingService.requestPermission();
+  ngOnInit(): void {
+    console.log('App initialized');
   }
 }
-
